@@ -1,6 +1,7 @@
 /* Use a more-intuitive box-sizing model */
 *{
     box-sizing: border-box;
+
 }
 
 /* Increase line-height */
@@ -21,12 +22,14 @@ h1, h2, h3, h4, h5, h6 {
 #container{
     display: flex;
     flex-wrap: wrap;
+    --hoverColor: teal;
     /*justify-content: space-between;*/
 }
 .square{    
-    background-color: brown;
+    background-color: rgb(255, 245, 221);
     aspect-ratio: 1 / 1;
 }
 .square:hover{
-    background-color:green;
+    background-color: var(--hoverColor);
 }
+

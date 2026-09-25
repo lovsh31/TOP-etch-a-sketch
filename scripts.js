@@ -5,16 +5,16 @@ const container = document.querySelector("#container");
 const buttonNewGrid = document.querySelector("#newGrid");
 buttonNewGrid.textContent = "Change Size";
 let squareNumber = 16;
+let squareColor = "brown";
+
 
 buttonNewGrid.addEventListener("click", ()=>{
     squareNumber = Number(prompt("Enter squares Number"));
-    console.log(Number.isInteger(squareNumber));
     if(!Number.isInteger(squareNumber))
         createGrid(16);
     else
         createGrid(squareNumber);    
 });
-
 
 function createGrid(size){
      
@@ -25,6 +25,8 @@ function createGrid(size){
         let divGrid = document.createElement("div");
         divGrid.classList.add("square");
         divGrid.style.width=(100/size)+"%"; //Adjust the size of each square to fit 16 per line
+        let randomColor = "#"+Math.floor(Math.random()*1000000); 
+        divGrid.style.setProperty('--hoverColor', randomColor); //Set a randomColor to the CSS variable --hoverColor
         container.appendChild(divGrid);
     }    
     
