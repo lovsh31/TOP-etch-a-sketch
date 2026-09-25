@@ -25,7 +25,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 .square{    
     background-color: brown;
-    /*width: 6%;*/
     aspect-ratio: 1 / 1;
 }
 .square:hover{
