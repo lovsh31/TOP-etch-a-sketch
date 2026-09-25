@@ -3,10 +3,23 @@ It’s best to put your grid squares inside a “container” div. This div can 
 Use Flexbox to make the divs appear as a grid (versus just one on each line). Despite the name, do not be tempted to research or use CSS Grid, as it will be taught in a later lesson after the foundations path. This project is an opportunity specifically to practice Flexbox!*/
 const container = document.querySelector("#container");
 const buttonNewGrid = document.querySelector("#newGrid");
+const selectColorBrush = document.querySelector("#colors");
 buttonNewGrid.textContent = "Change Grid Size";
-let squareNumber = 16;
-let squareColor = "brown";
 
+const colorArr = ["black"];
+selectColorBrush.style.backgroundColor = "black";
+
+for (let i = 0; i < 360; i+=20) {
+  colorArr.push(`hsl(${i}, 100%, 50%)`);
+}
+for (let color in colorArr){
+    let option = document.createElement("option");
+    option.value = colorArr[color];
+    option.style.backgroundColor = colorArr[color];
+    selectColorBrush.add(option);
+}
+
+let squareNumber = 16;
 
 buttonNewGrid.addEventListener("click", ()=>{
     squareNumber = Number(prompt("Enter squares Number"));
@@ -15,6 +28,7 @@ buttonNewGrid.addEventListener("click", ()=>{
     else
         createGrid(squareNumber);    
 });
+
 
 function createGrid(size){
      
@@ -31,30 +45,32 @@ function createGrid(size){
         divGrid.style.backgroundColor = randomColor;
 
         //B&W
-        //divGrid.style.backgroundColor = "black";
+        divGrid.style.backgroundColor = "black";
 
         container.appendChild(divGrid);
 
         
         let opacity = Number(divGrid.style.opacity);
         let isMouseDown = false;
-
+        function changeColor(){
+            selectColorBrush.style.backgroundColor = selectColorBrush.value;
+        }
         function changeOpacity(){ //darken the square by 20% on each hover
             if(isMouseDown){
+                divGrid.style.backgroundColor = selectColorBrush.value;
                 if(opacity<1)
                     opacity = opacity + 0.2;
                 divGrid.style.opacity = opacity;
             }
         }
+        selectColorBrush.addEventListener("change", changeColor)
 
         container.addEventListener("mousedown", (e)=>{
             e.preventDefault()
             isMouseDown = true;
         });
-        container.addEventListener("mouseup", ()=>{
+        window.addEventListener("mouseup", ()=>{
             isMouseDown = false;
-
-            //divGrid.removeEventListener("mouseover", changeColor);
         });
         
         
